@@ -53,6 +53,18 @@ const createGameboard = () => {
           this.board[x + i][y] = "ship";
         }
       }
+      this.board[x][y] = shipObj;
+    },
+    removeShip(x, y, shipObj, directoin) {
+      if (directoin === "horizontal") {
+        for (let i = 0; i < shipObj.shipLength; i++) {
+          this.board[x][y + i] = null;
+        }
+      } else if (directoin === "vertical") {
+        for (let i = 0; i < shipObj.shipLength; i++) {
+          this.board[x + i][y] = null;
+        }
+      }
     },
     receiveAttack(x, y) {
       if (this.board[x][y] === "ship") {
@@ -132,12 +144,14 @@ const gameLogic = (() => {
   let turn = player1.name;
   for (let x = 0; x < 10; x++) {
     for (let y = 0; y < 10; y++) {
-      if (boardSelf.board[x][y] === "ship") {
+      if (typeof boardSelf.board[x][y] === "object" && boardSelf.board[x][y] != null) {
         let cell = document.querySelector(
-          `[class="battle-cell-content battle-cell-content__self"][data-x="${x}"][data-y="${y}"]`
+          `[class$="battle-cell-content battle-cell-content__self"][data-x="${x}"][data-y="${y}"]`
         );
+        cell.classList.add("ship");
         cell.innerHTML = "S";
-        cell.style.backgroundColor = "#999999";
+        let shipObj = boardSelf.board[x][y];
+        cell.style.width = `${shipObj.shipLength * 36}px`;
       }
     }
   }
@@ -150,7 +164,7 @@ const AIMove = (x, y) => {
   } else {
     boardSelf.receiveAttack(x, y);
     let cell = document.querySelector(
-      `[class="battle-cell-content battle-cell-content__self"][data-x="${x}"][data-y="${y}"]`
+      `[class$="battle-cell-content battle-cell-content__self"][data-x="${x}"][data-y="${y}"]`
     );
     cell.innerHTML = "。";
     gameLogic.turn = player1.name;
@@ -164,16 +178,46 @@ const randomY = () => {
   return Math.floor(Math.random() * 10);
 };
 
+let dragObject = {};
+
 function allowDrop(ev) {
   ev.preventDefault();
 }
 
 function drag(ev) {
-  ev.dataTransfer.setData("text", ev.target.id);
+  ev.dataTransfer.setData("text1", ev.target.id);
+  ev.dataTransfer.setData("text2", JSON.stringify(ev.srcElement.dataset));
+  //originalLocation = ev.srcElement.dataset;
+  dragObject = ev.target;
+  //console.log(ev.target.parentNode);
 }
 
 function drop(ev) {
+  let data = ev.dataTransfer.getData("text1");
+  let originalLocation = JSON.parse(ev.dataTransfer.getData("text2"));
   ev.preventDefault();
-  let data = ev.dataTransfer.getData("text");
-  ev.target.appendChild(document.getElementById(data));
+  if (ev.target.tagName === "TD") {
+    ev.target.appendChild(document.getElementById(data));
+  } else {
+    ev.target.parentNode.appendChild(document.getElementById(data));
+    //console.log(ev.target);
+    let shipObj = boardSelf.board[originalLocation.x][originalLocation.y];
+    boardSelf.removeShip(
+      parseInt(originalLocation.x),
+      parseInt(originalLocation.y),
+      shipObj,
+      "horizontal"
+    );
+    boardSelf.placeShip(
+      parseInt(ev.target.dataset.x),
+      parseInt(ev.target.dataset.y),
+      shipObj,
+      "horizontal"
+    );
+    dragObject.dataset.x = ev.target.dataset.x;
+    dragObject.dataset.y = ev.target.dataset.y;
+  }
+  //console.log(ev.target);
 }
+
+function swapNode() {}
