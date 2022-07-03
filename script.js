@@ -140,7 +140,7 @@ battleCellContentRival.forEach((cell, index) => {
   });
 });
 
-const gameLogic = (() => {
+/*const gameLogic = (() => {
   let turn = player1.name;
   for (let x = 0; x < 10; x++) {
     for (let y = 0; y < 10; y++) {
@@ -148,15 +148,13 @@ const gameLogic = (() => {
         let cell = document.querySelector(
           `[class$="battle-cell-content battle-cell-content__self"][data-x="${x}"][data-y="${y}"]`
         );
-        cell.classList.add("ship");
-        cell.innerHTML = "S";
         let shipObj = boardSelf.board[x][y];
-        cell.style.width = `${shipObj.shipLength * 36}px`;
+        cell.style.width = `${shipObj.shipLength * 32 + (shipObj.shipLength - 1) * 1}px`;
       }
     }
   }
   return { turn: turn };
-})();
+})();*/
 
 const AIMove = (x, y) => {
   if (boardSelf.isHit(x, y) || boardSelf.isMiss(x, y)) {
@@ -178,46 +176,27 @@ const randomY = () => {
   return Math.floor(Math.random() * 10);
 };
 
-let dragObject = {};
-
 function allowDrop(ev) {
   ev.preventDefault();
 }
 
 function drag(ev) {
-  ev.dataTransfer.setData("text1", ev.target.id);
-  ev.dataTransfer.setData("text2", JSON.stringify(ev.srcElement.dataset));
-  //originalLocation = ev.srcElement.dataset;
-  dragObject = ev.target;
-  //console.log(ev.target.parentNode);
+  ev.dataTransfer.setData("target", ev.target.id);
+  ev.dataTransfer.setData("srcX", ev.path[1].dataset.x);
+  ev.dataTransfer.setData("srcY", ev.path[1].dataset.y);
 }
 
 function drop(ev) {
-  let data = ev.dataTransfer.getData("text1");
-  let originalLocation = JSON.parse(ev.dataTransfer.getData("text2"));
+  let data = ev.dataTransfer.getData("target");
+  let originalLocationX = Number(ev.dataTransfer.getData("srcX"));
+  let originalLocationY = Number(ev.dataTransfer.getData("srcY"));
+  let targetX = Number(ev.target.dataset.x);
+  let targetY = Number(ev.target.dataset.y);
   ev.preventDefault();
-  if (ev.target.tagName === "TD") {
-    ev.target.appendChild(document.getElementById(data));
-  } else {
-    ev.target.parentNode.appendChild(document.getElementById(data));
-    //console.log(ev.target);
-    let shipObj = boardSelf.board[originalLocation.x][originalLocation.y];
-    boardSelf.removeShip(
-      parseInt(originalLocation.x),
-      parseInt(originalLocation.y),
-      shipObj,
-      "horizontal"
-    );
-    boardSelf.placeShip(
-      parseInt(ev.target.dataset.x),
-      parseInt(ev.target.dataset.y),
-      shipObj,
-      "horizontal"
-    );
-    dragObject.dataset.x = ev.target.dataset.x;
-    dragObject.dataset.y = ev.target.dataset.y;
-  }
+  ev.target.appendChild(document.getElementById(data));
   //console.log(ev.target);
+  let shipObj = boardSelf.board[originalLocationX][originalLocationY];
+  boardSelf.removeShip(originalLocationX, originalLocationY, shipObj, "horizontal");
+  boardSelf.placeShip(targetX, targetY, shipObj, "horizontal");
+  console.log(boardSelf.board);
 }
-
-function swapNode() {}
