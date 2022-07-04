@@ -32,30 +32,7 @@
             <div class="battle-cell-content battle-cell-content__self" data-x="0" data-y="2"></div>
           </td>
           <td class="battlefield-cell" ondrop="drop(event)" ondragover="allowDrop(event)">
-            <div class="battle-cell-content battle-cell-content__self" data-x="0" data-y="3"></div>
-          </td>
-          <td class="battlefield-cell" ondrop="drop(event)" ondragover="allowDrop(event)">
-            <div class="battle-cell-content battle-cell-content__self" data-x="0" data-y="4"></div>
-          </td>
-          <td class="battlefield-cell" ondrop="drop(event)" ondragover="allowDrop(event)">
-            <div class="battle-cell-content battle-cell-content__self" data-x="0" data-y="5"></div>
-          </td>
-          <td class="battlefield-cell" ondrop="drop(event)" ondragover="allowDrop(event)">
-            <div class="battle-cell-content battle-cell-content__self" data-x="0" data-y="6"></div>
-          </td>
-          <td class="battlefield-cell" ondrop="drop(event)" ondragover="allowDrop(event)">
-            <div class="battle-cell-content battle-cell-content__self" data-x="0" data-y="7"></div>
-          </td>
-          <td class="battlefield-cell" ondrop="drop(event)" ondragover="allowDrop(event)">
-            <div class="battle-cell-content battle-cell-content__self" data-x="0" data-y="8"></div>
-          </td>
-          <td class="battlefield-cell" ondrop="drop(event)" ondragover="allowDrop(event)">
-            <div class="battle-cell-content battle-cell-content__self" data-x="0" data-y="9"></div>
-          </td>
-        </tr>
-        <tr class="battiefield-row__self">
-          <td class="battlefield-cell" ondrop="drop(event)" ondragover="allowDrop(event)">
-            <div class="battle-cell-content battle-cell-content__self" data-x="1" data-y="0">
+            <div class="battle-cell-content battle-cell-content__self" data-x="0" data-y="3">
               <div
                 class="shipbox ship"
                 ondragstart="drag(event)"
@@ -67,6 +44,51 @@
                 S
               </div>
             </div>
+          </td>
+          <td class="battlefield-cell" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div class="battle-cell-content battle-cell-content__self" data-x="0" data-y="4"></div>
+          </td>
+          <td class="battlefield-cell" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div class="battle-cell-content battle-cell-content__self" data-x="0" data-y="5"></div>
+          </td>
+          <td class="battlefield-cell" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div class="battle-cell-content battle-cell-content__self" data-x="0" data-y="6">
+              <div
+                class="shipbox ship"
+                ondragstart="drag(event)"
+                draggable="true"
+                id="drag3"
+                data-length="1"
+                style="width: 32px"
+              >
+                S
+              </div>
+            </div>
+          </td>
+          <td class="battlefield-cell" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div class="battle-cell-content battle-cell-content__self" data-x="0" data-y="7"></div>
+          </td>
+          <td class="battlefield-cell" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div class="battle-cell-content battle-cell-content__self" data-x="0" data-y="8"></div>
+          </td>
+          <td class="battlefield-cell" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div class="battle-cell-content battle-cell-content__self" data-x="0" data-y="9">
+              <div
+                class="shipbox ship"
+                ondragstart="drag(event)"
+                draggable="true"
+                id="drag4"
+                data-length="1"
+                style="width: 32px"
+              >
+                S
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr class="battiefield-row__self">
+          <td class="battlefield-cell" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div class="battle-cell-content battle-cell-content__self" data-x="1" data-y="0"></div>
           </td>
           <td class="battlefield-cell" ondrop="drop(event)" ondragover="allowDrop(event)">
             <div class="battle-cell-content battle-cell-content__self" data-x="1" data-y="1"></div>
@@ -98,21 +120,22 @@
         </tr>
         <tr class="battiefield-row__self">
           <td class="battlefield-cell" ondrop="drop(event)" ondragover="allowDrop(event)">
-            <div class="battle-cell-content battle-cell-content__self" data-x="2" data-y="0">
+            <div class="battle-cell-content battle-cell-content__self" data-x="2" data-y="0"></div>
+          </td>
+          <td class="battlefield-cell" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div class="battle-cell-content battle-cell-content__self" data-x="2" data-y="1">
               <div
                 class="shipbox ship"
                 ondragstart="drag(event)"
                 draggable="true"
-                id="drag3"
-                data-length="1"
-                style="width: 32px"
+                onclick="shipClick(event)"
+                id="drag5"
+                data-length="2"
+                style="width: 65px"
               >
                 S
               </div>
             </div>
-          </td>
-          <td class="battlefield-cell" ondrop="drop(event)" ondragover="allowDrop(event)">
-            <div class="battle-cell-content battle-cell-content__self" data-x="2" data-y="1"></div>
           </td>
           <td class="battlefield-cell" ondrop="drop(event)" ondragover="allowDrop(event)">
             <div class="battle-cell-content battle-cell-content__self" data-x="2" data-y="2"></div>
@@ -130,7 +153,19 @@
             <div class="battle-cell-content battle-cell-content__self" data-x="2" data-y="6"></div>
           </td>
           <td class="battlefield-cell" ondrop="drop(event)" ondragover="allowDrop(event)">
-            <div class="battle-cell-content battle-cell-content__self" data-x="2" data-y="7"></div>
+            <div class="battle-cell-content battle-cell-content__self" data-x="2" data-y="7">
+              <div
+                class="shipbox ship"
+                ondragstart="drag(event)"
+                draggable="true"
+                onclick="shipClick(event)"
+                id="drag6"
+                data-length="2"
+                style="width: 65px"
+              >
+                S
+              </div>
+            </div>
           </td>
           <td class="battlefield-cell" ondrop="drop(event)" ondragover="allowDrop(event)">
             <div class="battle-cell-content battle-cell-content__self" data-x="2" data-y="8"></div>
@@ -141,18 +176,7 @@
         </tr>
         <tr class="battiefield-row__self">
           <td class="battlefield-cell" ondrop="drop(event)" ondragover="allowDrop(event)">
-            <div class="battle-cell-content battle-cell-content__self" data-x="3" data-y="0">
-              <div
-                class="shipbox ship"
-                ondragstart="drag(event)"
-                draggable="true"
-                id="drag4"
-                data-length="1"
-                style="width: 32px"
-              >
-                S
-              </div>
-            </div>
+            <div class="battle-cell-content battle-cell-content__self" data-x="3" data-y="0"></div>
           </td>
           <td class="battlefield-cell" ondrop="drop(event)" ondragover="allowDrop(event)">
             <div class="battle-cell-content battle-cell-content__self" data-x="3" data-y="1"></div>
@@ -164,7 +188,19 @@
             <div class="battle-cell-content battle-cell-content__self" data-x="3" data-y="3"></div>
           </td>
           <td class="battlefield-cell" ondrop="drop(event)" ondragover="allowDrop(event)">
-            <div class="battle-cell-content battle-cell-content__self" data-x="3" data-y="4"></div>
+            <div class="battle-cell-content battle-cell-content__self" data-x="3" data-y="4">
+              <div
+                class="shipbox ship"
+                ondragstart="drag(event)"
+                draggable="true"
+                onclick="shipClick(event)"
+                id="drag7"
+                data-length="2"
+                style="width: 65px"
+              >
+                S
+              </div>
+            </div>
           </td>
           <td class="battlefield-cell" ondrop="drop(event)" ondragover="allowDrop(event)">
             <div class="battle-cell-content battle-cell-content__self" data-x="3" data-y="5"></div>
@@ -184,18 +220,7 @@
         </tr>
         <tr class="battiefield-row__self">
           <td class="battlefield-cell" ondrop="drop(event)" ondragover="allowDrop(event)">
-            <div class="battle-cell-content battle-cell-content__self" data-x="4" data-y="0">
-              <div
-                class="shipbox ship"
-                ondragstart="drag(event)"
-                draggable="true"
-                id="drag5"
-                data-length="2"
-                style="width: 65px"
-              >
-                S
-              </div>
-            </div>
+            <div class="battle-cell-content battle-cell-content__self" data-x="4" data-y="0"></div>
           </td>
           <td class="battlefield-cell" ondrop="drop(event)" ondragover="allowDrop(event)">
             <div class="battle-cell-content battle-cell-content__self" data-x="4" data-y="1"></div>
@@ -227,18 +252,7 @@
         </tr>
         <tr class="battiefield-row__self">
           <td class="battlefield-cell" ondrop="drop(event)" ondragover="allowDrop(event)">
-            <div class="battle-cell-content battle-cell-content__self" data-x="5" data-y="0">
-              <div
-                class="shipbox ship"
-                ondragstart="drag(event)"
-                draggable="true"
-                id="drag6"
-                data-length="2"
-                style="width: 65px"
-              >
-                S
-              </div>
-            </div>
+            <div class="battle-cell-content battle-cell-content__self" data-x="5" data-y="0"></div>
           </td>
           <td class="battlefield-cell" ondrop="drop(event)" ondragover="allowDrop(event)">
             <div class="battle-cell-content battle-cell-content__self" data-x="5" data-y="1"></div>
@@ -270,21 +284,22 @@
         </tr>
         <tr class="battiefield-row__self">
           <td class="battlefield-cell" ondrop="drop(event)" ondragover="allowDrop(event)">
-            <div class="battle-cell-content battle-cell-content__self" data-x="6" data-y="0">
+            <div class="battle-cell-content battle-cell-content__self" data-x="6" data-y="0"></div>
+          </td>
+          <td class="battlefield-cell" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div class="battle-cell-content battle-cell-content__self" data-x="6" data-y="1">
               <div
                 class="shipbox ship"
                 ondragstart="drag(event)"
                 draggable="true"
-                id="drag7"
-                data-length="2"
-                style="width: 65px"
+                onclick="shipClick(event)"
+                id="drag8"
+                data-length="3"
+                style="width: 98px"
               >
                 S
               </div>
             </div>
-          </td>
-          <td class="battlefield-cell" ondrop="drop(event)" ondragover="allowDrop(event)">
-            <div class="battle-cell-content battle-cell-content__self" data-x="6" data-y="1"></div>
           </td>
           <td class="battlefield-cell" ondrop="drop(event)" ondragover="allowDrop(event)">
             <div class="battle-cell-content battle-cell-content__self" data-x="6" data-y="2"></div>
@@ -299,7 +314,19 @@
             <div class="battle-cell-content battle-cell-content__self" data-x="6" data-y="5"></div>
           </td>
           <td class="battlefield-cell" ondrop="drop(event)" ondragover="allowDrop(event)">
-            <div class="battle-cell-content battle-cell-content__self" data-x="6" data-y="6"></div>
+            <div class="battle-cell-content battle-cell-content__self" data-x="6" data-y="6">
+              <div
+                class="shipbox ship"
+                ondragstart="drag(event)"
+                draggable="true"
+                onclick="shipClick(event)"
+                id="drag9"
+                data-length="3"
+                style="width: 98px"
+              >
+                S
+              </div>
+            </div>
           </td>
           <td class="battlefield-cell" ondrop="drop(event)" ondragover="allowDrop(event)">
             <div class="battle-cell-content battle-cell-content__self" data-x="6" data-y="7"></div>
@@ -313,18 +340,7 @@
         </tr>
         <tr class="battiefield-row__self">
           <td class="battlefield-cell" ondrop="drop(event)" ondragover="allowDrop(event)">
-            <div class="battle-cell-content battle-cell-content__self" data-x="7" data-y="0">
-              <div
-                class="shipbox ship"
-                ondragstart="drag(event)"
-                draggable="true"
-                id="drag8"
-                data-length="3"
-                style="width: 98px"
-              >
-                S
-              </div>
-            </div>
+            <div class="battle-cell-content battle-cell-content__self" data-x="7" data-y="0"></div>
           </td>
           <td class="battlefield-cell" ondrop="drop(event)" ondragover="allowDrop(event)">
             <div class="battle-cell-content battle-cell-content__self" data-x="7" data-y="1"></div>
@@ -356,18 +372,7 @@
         </tr>
         <tr class="battiefield-row__self">
           <td class="battlefield-cell" ondrop="drop(event)" ondragover="allowDrop(event)">
-            <div class="battle-cell-content battle-cell-content__self" data-x="8" data-y="0">
-              <div
-                class="shipbox ship"
-                ondragstart="drag(event)"
-                draggable="true"
-                id="drag9"
-                data-length="3"
-                style="width: 98px"
-              >
-                S
-              </div>
-            </div>
+            <div class="battle-cell-content battle-cell-content__self" data-x="8" data-y="0"></div>
           </td>
           <td class="battlefield-cell" ondrop="drop(event)" ondragover="allowDrop(event)">
             <div class="battle-cell-content battle-cell-content__self" data-x="8" data-y="1"></div>
@@ -376,7 +381,19 @@
             <div class="battle-cell-content battle-cell-content__self" data-x="8" data-y="2"></div>
           </td>
           <td class="battlefield-cell" ondrop="drop(event)" ondragover="allowDrop(event)">
-            <div class="battle-cell-content battle-cell-content__self" data-x="8" data-y="3"></div>
+            <div class="battle-cell-content battle-cell-content__self" data-x="8" data-y="3">
+              <div
+                class="shipbox ship"
+                ondragstart="drag(event)"
+                draggable="true"
+                onclick="shipClick(event)"
+                id="drag10"
+                data-length="4"
+                style="width: 131px"
+              >
+                S
+              </div>
+            </div>
           </td>
           <td class="battlefield-cell" ondrop="drop(event)" ondragover="allowDrop(event)">
             <div class="battle-cell-content battle-cell-content__self" data-x="8" data-y="4"></div>
@@ -399,18 +416,7 @@
         </tr>
         <tr class="battiefield-row__self">
           <td class="battlefield-cell" ondrop="drop(event)" ondragover="allowDrop(event)">
-            <div class="battle-cell-content battle-cell-content__self" data-x="9" data-y="0">
-              <div
-                class="shipbox ship"
-                ondragstart="drag(event)"
-                draggable="true"
-                id="drag10"
-                data-length="4"
-                style="width: 131px"
-              >
-                S
-              </div>
-            </div>
+            <div class="battle-cell-content battle-cell-content__self" data-x="9" data-y="0"></div>
           </td>
           <td class="battlefield-cell" ondrop="drop(event)" ondragover="allowDrop(event)">
             <div class="battle-cell-content battle-cell-content__self" data-x="9" data-y="1"></div>
