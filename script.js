@@ -205,6 +205,7 @@ function drop(ev) {
   let originalLocationY = Number(ev.dataTransfer.getData("srcY"));
   let targetX = Number(ev.target.dataset.x);
   let targetY = Number(ev.target.dataset.y);
+  if (isNaN(targetX) || isNaN(targetY)) return;
   ev.preventDefault();
   let shipObj = boardSelf.board[originalLocationX][originalLocationY];
   if (shipObj.direction === "horizontal") {
