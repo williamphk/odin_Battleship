@@ -59,14 +59,18 @@ const createGameboard = () => {
     placeShip(x, y, shipObj, directoin) {
       if (directoin === "horizontal") {
         for (let i = 0; i < shipObj.shipLength; i++) {
-          this.board[x][y + i] = "ship";
+          if (this.board[x][y] != null)
+          {if ((this.board[x][y + i] = "ship")) {
+          } else {
+            this.board[x][y + i] = "ship";
+          }
         }
       } else if (directoin === "vertical") {
         for (let i = 0; i < shipObj.shipLength; i++) {
           this.board[x + i][y] = "ship";
         }
       }
-      this.board[x][y] = shipObj;
+      this.board[x][y] = shipObj;}
     },
     removeShip(x, y, shipObj, directoin) {
       if (directoin === "horizontal") {
@@ -109,16 +113,28 @@ const createGameboard = () => {
 let boardSelf = createGameboard();
 let boardRival = createGameboard();
 
-boardRival.placeShip(0, 0, selfShip1, "horizontal");
-boardRival.placeShip(0, 3, selfShip2, "horizontal");
-boardRival.placeShip(0, 6, selfShip3, "horizontal");
-boardRival.placeShip(0, 9, selfShip4, "horizontal");
-boardRival.placeShip(2, 1, selfShip5, "horizontal");
-boardRival.placeShip(2, 7, selfShip6, "horizontal");
-boardRival.placeShip(3, 4, selfShip7, "horizontal");
-boardRival.placeShip(6, 1, selfShip8, "horizontal");
-boardRival.placeShip(6, 6, selfShip9, "horizontal");
-boardRival.placeShip(8, 3, selfShip10, "horizontal");
+const randomX = () => {
+  return Math.floor(Math.random() * 10);
+};
+const randomY = () => {
+  return Math.floor(Math.random() * 10);
+};
+const randomDirection = () => {
+  let number = Math.floor(Math.random() * 2);
+  if (number === 0) return "horizontal";
+  if (number === 1) return "vertical";
+};
+
+boardRival.placeShip(randomX(), randomY(), selfShip1, randomDirection());
+boardRival.placeShip(randomX(), randomY(), selfShip2, randomDirection());
+boardRival.placeShip(randomX(), randomY(), selfShip3, randomDirection());
+boardRival.placeShip(randomX(), randomY(), selfShip4, randomDirection());
+boardRival.placeShip(randomX(), randomY(), selfShip5, randomDirection());
+boardRival.placeShip(randomX(), randomY(), selfShip6, randomDirection());
+boardRival.placeShip(randomX(), randomY(), selfShip7, randomDirection());
+boardRival.placeShip(randomX(), randomY(), selfShip8, randomDirection());
+boardRival.placeShip(randomX(), randomY(), selfShip9, randomDirection());
+boardRival.placeShip(randomX(), randomY(), selfShip10, randomDirection());
 
 boardSelf.placeShip(0, 0, rivalShip1, "horizontal");
 boardSelf.placeShip(0, 3, rivalShip2, "horizontal");
@@ -144,6 +160,8 @@ const battleCellContentSelf = document.querySelectorAll(".battle-cell-content__s
 battleCellContentRival.forEach((cell, index) => {
   cell.addEventListener("click", (e) => {
     if (gameLogic.turn === player2.name) return;
+    if (cell.innerHTML === "。") return;
+    if (!gameStart) return;
     else {
       cell.innerHTML = "。";
       boardRival.receiveAttack(
@@ -179,14 +197,8 @@ const AIMove = (x, y) => {
   }
 };
 
-const randomX = () => {
-  return Math.floor(Math.random() * 10);
-};
-const randomY = () => {
-  return Math.floor(Math.random() * 10);
-};
-
 function drag(ev) {
+  if (abort === true) return;
   ev.dataTransfer.setData("target", ev.target.id);
   ev.dataTransfer.setData("target-length", ev.target.dataset.length);
   ev.dataTransfer.setData("srcX", ev.path[1].dataset.x);
@@ -194,11 +206,13 @@ function drag(ev) {
 }
 
 function allowDrop(ev) {
+  if (abort === true) return;
   ev.preventDefault();
   ev.dataTransfer.dropEffect = "move";
 }
 
 function drop(ev) {
+  if (abort === true) return;
   let data = ev.dataTransfer.getData("target");
   let dataLength = ev.dataTransfer.getData("target-length");
   let originalLocationX = Number(ev.dataTransfer.getData("srcX"));
@@ -226,6 +240,7 @@ function drop(ev) {
 }
 
 function shipClick(event) {
+  if (abort === true) return;
   let shipX = Number(event.path[1].dataset.x);
   let shipY = Number(event.path[1].dataset.y);
   let shipObj = boardSelf.board[shipX][shipY];
@@ -251,3 +266,6 @@ function shipClick(event) {
     }
   }
 }
+
+let abort = false;
+let gameStart = false;
