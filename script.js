@@ -56,28 +56,52 @@ const createGameboard = () => {
       [null, null, null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null, null, null],
     ],
-    placeShip(x, y, shipObj, directoin) {
-      if (directoin === "horizontal") {
+    placeShip(x, y, shipObj, direction) {
+      let spaceAvailable = true;
+      if (direction === "horizontal") {
         for (let i = 0; i < shipObj.shipLength; i++) {
-          if (this.board[x][y] != null)
-          {if ((this.board[x][y + i] = "ship")) {
-          } else {
-            this.board[x][y + i] = "ship";
+          console.log(shipObj.shipName, direction, x, y + i, this.board[x][y + i]);
+          if (this.board[x][y + i] !== null || this.board[x][y + i] === undefined) {
+            spaceAvailable = false;
+            console.log("space not available");
           }
         }
-      } else if (directoin === "vertical") {
+        if (spaceAvailable) {
+          for (let i = 0; i < shipObj.shipLength; i++) {
+            this.board[x][y + i] = "ship";
+          }
+          console.log("space available");
+          console.log(`placed ${shipObj.shipName} at ${x} ${y} Direction:${direction}`);
+          this.board[x][y] = shipObj;
+        } else if (!spaceAvailable) {
+          boardRival.placeShip(randomX(), randomY(), shipObj, direction);
+        }
+      } else if (direction === "vertical") {
         for (let i = 0; i < shipObj.shipLength; i++) {
-          this.board[x + i][y] = "ship";
+          console.log(shipObj.shipName, direction, x + i, y, this.board[x][y]);
+          if (this.board[x + i]?.[y] || this.board[x + i]?.[y] === undefined) {
+            spaceAvailable = false;
+            console.log("space not available");
+          }
+        }
+        if (spaceAvailable) {
+          for (let i = 0; i < shipObj.shipLength; i++) {
+            this.board[x + i][y] = "ship";
+          }
+          console.log("space available");
+          console.log(`placed ${shipObj.shipName} at ${x} ${y} Direction:${direction}`);
+          this.board[x][y] = shipObj;
+        } else if (!spaceAvailable) {
+          boardRival.placeShip(randomX(), randomY(), shipObj, direction);
         }
       }
-      this.board[x][y] = shipObj;}
     },
-    removeShip(x, y, shipObj, directoin) {
-      if (directoin === "horizontal") {
+    removeShip(x, y, shipObj, direction) {
+      if (direction === "horizontal") {
         for (let i = 0; i < shipObj.shipLength; i++) {
           this.board[x][y + i] = null;
         }
-      } else if (directoin === "vertical") {
+      } else if (direction === "vertical") {
         for (let i = 0; i < shipObj.shipLength; i++) {
           this.board[x + i][y] = null;
         }
@@ -100,12 +124,11 @@ const createGameboard = () => {
       return this.board[x][y] === "hit" ? true : false;
     },
     isAllShipSink() {
-      return this.board.every(
-        ([position]) =>
-          (position === "hit" || position === null) && position != "ship" && position != null
-      )
-        ? true
-        : false;
+      return !this.board.some((arr) =>
+        arr.some(
+          (position) => (typeof position === "object" && position !== null) || position === "ship"
+        )
+      );
     },
   };
 };
@@ -153,12 +176,16 @@ const createPlayer = (name) => {
 
 let player1 = createPlayer("Player");
 let player2 = createPlayer("AI");
+let isGameEnd = false;
 
 const battleCellContentRival = document.querySelectorAll(".battle-cell-content__rival");
 const battleCellContentSelf = document.querySelectorAll(".battle-cell-content__self");
 
+const result = document.querySelector(".result");
+
 battleCellContentRival.forEach((cell, index) => {
   cell.addEventListener("click", (e) => {
+    if (isGameEnd) return;
     if (gameLogic.turn === player2.name) return;
     if (cell.innerHTML === "。") return;
     if (!gameStart) return;
@@ -168,8 +195,13 @@ battleCellContentRival.forEach((cell, index) => {
         battleCellContentRival[index].dataset.x,
         battleCellContentRival[index].dataset.y
       );
-      gameLogic.turn = player2.name;
-      AIMove(randomX(), randomY());
+      if (boardRival.isAllShipSink()) {
+        result.innerHTML = "You win";
+        isGameEnd = true;
+      } else {
+        gameLogic.turn = player2.name;
+        AIMove(randomX(), randomY());
+      }
     }
   });
 });
@@ -193,7 +225,12 @@ const AIMove = (x, y) => {
     } else if (boardSelf.isMiss(x, y)) {
       cell.innerHTML = "M";
     }
-    gameLogic.turn = player1.name;
+    if (boardSelf.isAllShipSink()) {
+      result.innerHTML = "AI win";
+      isGameEnd = true;
+    } else {
+      gameLogic.turn = player1.name;
+    }
   }
 };
 
